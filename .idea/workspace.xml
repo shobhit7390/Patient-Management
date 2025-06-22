@@ -4,14 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86ab960d-e439-4f1b-be71-dbe73c7f463a" name="Changes" comment="First commit">
+    <list default="true" id="86ab960d-e439-4f1b-be71-dbe73c7f463a" name="Changes" comment="patient-service docker setup">
+      <change afterPath="$PROJECT_DIR$/billing-service/src/main/java/com/pm/billing_service/grpc/BillingGrpcService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/grpc-requests/billing-service/create-billing-account.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patient-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/patient-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/billing-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/billing-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -21,6 +30,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;shobhit7390&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/shobhit7390/Patient-Management.git&quot;,
+    &quot;accountId&quot;: &quot;36bf7d59-fdef-499e-9dcc-778d34f181b0&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -30,18 +51,118 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feature/backendWork",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/shobhityadav/Desktop/SpringBoot/patient-management",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.patient-service-db.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.patient-service.executor&quot;: &quot;Run&quot;,
+    &quot;HttpClient.HTTP Request ▏#1.executor&quot;: &quot;httpExecutor&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/backendWork&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/shobhityadav/Desktop/SpringBoot/patient-management&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager" selected="HttpClient.HTTP Request ▏#1">
+    <configuration name="patient-service-db" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+      <deployment type="docker-image">
+        <settings>
+          <option name="imageTag" value="postgres:latest" />
+          <option name="containerName" value="patient-service-db" />
+          <option name="envVars">
+            <list>
+              <DockerEnvVarImpl>
+                <option name="name" value="POSTGRES_USER" />
+                <option name="value" value="admin_user" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="POSTGRES_PASSWORD" />
+                <option name="value" value="password" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="POSTGRES_DB" />
+                <option name="value" value="db" />
+              </DockerEnvVarImpl>
+            </list>
+          </option>
+          <option name="portBindings">
+            <list>
+              <DockerPortBindingImpl>
+                <option name="containerPort" value="5432" />
+                <option name="hostPort" value="5001" />
+              </DockerPortBindingImpl>
+            </list>
+          </option>
+          <option name="commandLineOptions" value="--network internal" />
+          <option name="volumeBindings">
+            <list>
+              <DockerVolumeBindingImpl>
+                <option name="containerPath" value="/var/lib/postgresql/data" />
+                <option name="hostPath" value="$PROJECT_DIR$/../db/patient-service" />
+              </DockerVolumeBindingImpl>
+            </list>
+          </option>
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="patient-service" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="patient-service:latest" />
+          <option name="containerName" value="patient-service" />
+          <option name="envVars">
+            <list>
+              <DockerEnvVarImpl>
+                <option name="name" value="SPRING_DATASOURCE_PASSWORD" />
+                <option name="value" value="password" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="SPRING_DATASOURCE_URL" />
+                <option name="value" value="jdbc:postgresql://patient-service-db:5432/db" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="SPRING_DATASOURCE_USERNAME" />
+                <option name="value" value="admin_user" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="SPRING_JPA_HIBERNATE_DDL_AUTO" />
+                <option name="value" value="update" />
+              </DockerEnvVarImpl>
+              <DockerEnvVarImpl>
+                <option name="name" value="SPRING_SQL_INIT_MODE" />
+                <option name="value" value="always" />
+              </DockerEnvVarImpl>
+            </list>
+          </option>
+          <option name="portBindings">
+            <list>
+              <DockerPortBindingImpl>
+                <option name="containerPort" value="4000" />
+                <option name="hostPort" value="4000" />
+              </DockerPortBindingImpl>
+            </list>
+          </option>
+          <option name="commandLineOptions" value="--network internal" />
+          <option name="sourceFilePath" value="patient-service/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="HTTP Request ▏#1" type="intellijHttpClient" activateToolWindowBeforeRun="false">
+      <env />
+      <httpFilePath>$PROJECT_DIR$/grpc-requests/billing-service/create-billing-account.http</httpFilePath>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.patient-service" />
+      <item itemvalue="Docker.patient-service-db" />
+      <item itemvalue="HttpClient.HTTP Request ▏#1" />
+    </list>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -59,12 +180,38 @@
       <option name="project" value="LOCAL" />
       <updated>1749937130271</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added controller">
+      <option name="closed" value="true" />
+      <created>1750006367020</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750006367020</updated>
+    </task>
+    <task id="LOCAL-00003" summary="patient-service docker setup">
+      <option name="closed" value="true" />
+      <created>1750537162539</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750537162539</updated>
+    </task>
+    <task id="LOCAL-00004" summary="patient-service docker setup">
+      <option name="closed" value="true" />
+      <created>1750596485471</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750596485471</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="FIrst commit" />
     <MESSAGE value="First commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First commit" />
+    <MESSAGE value="Added controller" />
+    <MESSAGE value="patient-service docker setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="patient-service docker setup" />
   </component>
 </project>

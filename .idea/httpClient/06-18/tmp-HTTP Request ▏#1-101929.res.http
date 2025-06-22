@@ -1,0 +1,7 @@
+// Status: 204, time: 105ms, size: 0 B
+### HTTP Request ▏#1
+DELETE http://localhost:4000/patients/123e4567-e89b-12d3-a456-426614174000 HTTP/1.1
+date: Wed, 18 Jun 2025 04:49:29 GMT
+
+
+>> /Users/shobhityadav/Desktop/SpringBoot/patient-management/.idea/httpClient/06-18/HTTP Request ▏#1/2025-06-18T101929.txt
